@@ -45,8 +45,6 @@ class VisibilityCalculation:
     def get_visibility(self):
         self.get_maxs_mins()
         self.visibility = (np.mean(self.maxs) - np.mean(self.mins)) / (np.mean(self.maxs) + np.mean(self.mins))
-        N_max = len(self.maxs)
-        N_min = len(self.mins)
 
         # standard error of the mean
         mean_max = np.mean(self.maxs)
@@ -56,7 +54,7 @@ class VisibilityCalculation:
         
         partial_V_max = (2 * mean_min) / ((mean_max + mean_min)**2)
         partial_V_min = (-2 * mean_max) / ((mean_max + mean_min)**2)
-        self.visibility_error = np.sqrt((partial_V_max * sem_max)**2 + (partial_V_min * sem_min)**2)
+        self.visibility_error = np.sqrt((partial_V_max * sem_max)**2 + (partial_V_min * sem_min)**2) 
         
 
         return self.visibility, self.visibility_error
