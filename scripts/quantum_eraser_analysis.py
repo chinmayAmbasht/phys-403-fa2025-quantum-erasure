@@ -14,9 +14,14 @@ class QuantumVisibilityCalculation:
         mean_min = np.mean(self.data['Min Counts'])
         mean_visibility = (mean_max - mean_min) / (mean_max + mean_min)
         self.visibility = mean_visibility
+        self.mean_max = mean_max
+        self.mean_min = mean_min
         
-        sem_max = np.std(self.data['Max Counts'])
-        sem_min = np.std(self.data['Min Counts'])
+        sem_max = np.std(self.data['Max Counts'], ddof = 1)
+        sem_min = np.std(self.data['Min Counts'], ddof = 1)
+        
+        self.mean_sem_max = sem_max
+        self.mean_sem_min = sem_min
         
         partial_V_max = (2 * mean_min) / ((mean_max + mean_min)**2)
         partial_V_min = (-2 * mean_max) / ((mean_max + mean_min)**2)
